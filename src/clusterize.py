@@ -104,8 +104,8 @@ class Clusterizer():
         return score
     
     def save_results(self, init_df, transformed):
-        init_df.join(transformed.select(*metadata_cols, "prediction"), on="code", how="left") \
-            .select(*metadata_cols, 'prediction') \
+        init_df.join(transformed.select(*self.metadata_cols, "prediction"), on="code", how="left") \
+            .select(*self.metadata_cols, 'prediction') \
             .write.format("csv") \
             .mode("overwrite") \
             .save("./sparkdata/predictions.csv")
