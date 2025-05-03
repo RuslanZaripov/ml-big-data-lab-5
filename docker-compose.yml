@@ -1,0 +1,15 @@
+services:
+
+  spark:
+    container_name: spark
+    image: jupyter/all-spark-notebook:spark-3.5.0
+    command: sh -c '
+      pip install --upgrade pip &&
+      pip install -r /app/requirements.txt &&
+      start-notebook.sh --NotebookApp.token="" --NotebookApp.password=""'
+    ports:
+      - 8888:8888 # Jupyter web interface
+      - 4040:4040 # Spark UI
+    working_dir: /app
+    volumes:
+      - ./:/app
